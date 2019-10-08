@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Individual User</title>
+</head>
+<body>
+<div th:replace="fragments/common :: nav-loggedin-admin"></div>
+<ul th:each="user : ${user}">
+    <li th:text="'Username: '+${user.username}"></li>
+    <li th:text="'First Name: '+${user.firstName}"></li>
+    <li th:text="'Last Name: '+${user.lastName}"></li>
+    <li th:text="'DOB: '+${user.dateOfBirth}"></li>
+    <li th:text="'Bio: '+${user.bio}"></li>
+</ul>
+</body>
+</html>
