@@ -5,7 +5,7 @@
     <title>User page</title>
 </head>
 <body>
-<div th:replace="fragments/common :: nav-loggedin-admin"></div>
+<div th:replace="fragments/common :: ${navbar}"></div>
 User Accounts:
 <ul th:each="user : ${users}">
     <li><a th:href="'users/'+${user.id}">Username:  [[${user.username}]]</a></li>

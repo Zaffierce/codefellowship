@@ -3,26 +3,27 @@ package com.Zaffierce.codefellowship.models;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Collection;
+import java.util.List;
 
 @Entity
 public class ApplicationUser implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public long id;
+    private long id;
 
     protected String username;
-    protected String password;
-    protected String firstName;
-    protected String lastName;
-    protected String dateOfBirth;
-    protected String bio;
+    private String password;
+    private String firstName;
+    private String lastName;
+    private String dateOfBirth;
+    private String bio;
 
+    public List<Post> getPosts() { return posts; }
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "owner")
+    List<Post> posts;
 
     public ApplicationUser() {}
 

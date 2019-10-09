@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.view.RedirectView;
 
+import java.security.Principal;
 import java.util.List;
 
 @Controller
@@ -45,15 +46,20 @@ public class ApplicationUserController {
     }
 
     @GetMapping("/users")
-    public String getUsers(Model m) {
+    public String getUsers(Model m, Principal p) {
+        if (p != null) { m.addAttribute("username", p.getName()); }
         List<ApplicationUser> users = applicationUserRepository.findAll();
+
         m.addAttribute("users", users);
         return "users";
     }
 
     @GetMapping("/users/{userID}")
-    public String viewSingleUser(Model m, @PathVariable Long userID){
-        m.addAttribute("user", applicationUserRepository.getOne(userID));
+    public String viewSingleUser(Model m, @PathVariable Long userID, Principal p){
+        if (p != null) { m.addAttribute("username", p.getName()); }
+        m.addAttribute("user", applicationUserRepository.findById(userID).get());
+        m.addAttribute("user", p);
         return "single-user";
     }
+
 }
