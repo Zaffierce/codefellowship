@@ -5,28 +5,39 @@
     <title>Title</title>
 </head>
 <body>
-<div th:fragment="nav-loggedout">
-    <nav>
+<div th:fragment="navbar">
+    <nav th:if="${username}">
+        <a href="/">Home</a>
+        <a th:href="'/myprofile/'+${userID}">My Profile</a>
+        <a href="/logout">Logout</a>
+    </nav>
+
+    <nav th:unless="${username}">
         <a href="/">Home</a>
         <a href="/login">Login</a>
         <a href="/signup">Join</a>
     </nav>
 </div>
 
-<div th:fragment="nav-loggedin-user">
-    <nav>
-        <a href="/">Home</a>
-        <a href="/logout">Logout</a>
-    </nav>
-</div>
+<!--<div th:fragment="nav-loggedout">-->
+<!--    <nav>-->
 
-<div th:fragment="nav-loggedin-admin">
-    <nav>
-        <a href="/">Home</a>
-        <a href="/logout">Logout</a>
-        <a href="/users">User Management</a>
-    </nav>
-</div>
+<!--    </nav>-->
+<!--</div>-->
+
+<!--<div th:fragment="nav-loggedin-user">-->
+<!--    <nav>-->
+
+<!--    </nav>-->
+<!--</div>-->
+
+<!--<div th:fragment="nav-loggedin-admin">-->
+<!--    <nav>-->
+<!--        <a href="/">Home</a>-->
+<!--        <a href="/logout">Logout</a>-->
+<!--        <a href="/users">User Management</a>-->
+<!--    </nav>-->
+<!--</div>-->
 
 
 </body>
