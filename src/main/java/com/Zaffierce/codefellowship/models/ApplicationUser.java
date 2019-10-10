@@ -6,6 +6,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 public class ApplicationUser implements UserDetails {
@@ -13,6 +14,17 @@ public class ApplicationUser implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
+    @ManyToMany
+    @JoinTable(
+            name="following_users",
+            joinColumns ={ @JoinColumn(name="follower_profile_id")},
+            inverseJoinColumns = {@JoinColumn(name="following_profile_id")}
+    )
+    Set<ApplicationUser> usersIFollow;
+
+    @ManyToMany(mappedBy = "usersIFollow")
+    Set<ApplicationUser> usersThatFollowMe;
 
     protected String username;
     private String password;
@@ -24,6 +36,14 @@ public class ApplicationUser implements UserDetails {
     public List<Post> getPosts() { return posts; }
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "owner")
     List<Post> posts;
+
+    public Set<ApplicationUser> getUsersIFollow() {
+        return usersIFollow;
+    }
+
+    public Set<ApplicationUser> getUsersThatFollowMe() {
+        return usersThatFollowMe;
+    }
 
     public ApplicationUser() {}
 
@@ -76,4 +96,9 @@ public class ApplicationUser implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
+
+    public void followThisUser(ApplicationUser originalPoster) {
+        usersIFollow.add(originalPoster);
+    }
+
 }

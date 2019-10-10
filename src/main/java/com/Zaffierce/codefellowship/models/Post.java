@@ -4,6 +4,7 @@ import javax.persistence.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Set;
 
 @Entity
 public class Post {
@@ -17,6 +18,7 @@ public class Post {
 
     private String body;
     private String createdAt;
+
 
     public String getBody() {
         return body;
@@ -39,6 +41,17 @@ public class Post {
     }
 
     public String toString() {
-        return String.format("%s -- Created on %s", this.body, this.createdAt);
+        return String.format("'%s':   %s -- Created on %s", this.owner.username, this.body, this.createdAt);
     }
+
+//    public String toString() {
+//        StringBuilder userPosts = new StringBuilder();
+//
+//        for (Post post : usersIFollow){
+//            userPosts.append(post.owner.username+":  "+post.body+" -- Created on "+post.createdAt);
+//        }
+//        return String.format("%s", userPosts);
+//    }
+
+
 }

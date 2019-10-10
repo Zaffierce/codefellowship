@@ -6,6 +6,9 @@
 </head>
 <body>
 <div th:replace="fragments/common :: ${navbar}"></div>
+<div th:if="${param.error}">
+    There was an error!
+</div>
 <form action="/login" method="POST">
     <fieldset>
         <input name="username" placeholder="username"/>

@@ -9,7 +9,10 @@
     <nav th:if="${username}">
         <a href="/">Home</a>
         <a th:href="'/myprofile/'+${userID}">My Profile</a>
+        <a href="/feed">Your Feed</a>
+        <a href="/users">Search Profiles</a>
         <a href="/logout">Logout</a>
+        <div>Welcome [[${username}]]!</div>
     </nav>
 
     <nav th:unless="${username}">
