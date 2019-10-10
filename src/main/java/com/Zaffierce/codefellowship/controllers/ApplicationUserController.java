@@ -47,7 +47,10 @@ public class ApplicationUserController {
 
     @GetMapping("/users")
     public String getUsers(Model m, Principal p) {
-        if (p != null) { m.addAttribute("username", p.getName()); }
+        if (p != null) {
+            ApplicationUser theUser = applicationUserRepository.findByUsername(p.getName());
+            m.addAttribute("userID", theUser.getId());
+            m.addAttribute("username", p.getName()); }
         List<ApplicationUser> users = applicationUserRepository.findAll();
 
         m.addAttribute("users", users);
@@ -55,11 +58,15 @@ public class ApplicationUserController {
     }
 
     @GetMapping("/users/{userID}")
-    public String viewSingleUser(Model m, @PathVariable Long userID, Principal p){
-        if (p != null) { m.addAttribute("username", p.getName()); }
-        m.addAttribute("user", applicationUserRepository.findById(userID).get());
-        m.addAttribute("user", p);
-        return "single-user";
+    public String viewSingleUser(Model m, @PathVariable Long id, Principal p){
+        if (p != null) {
+            ApplicationUser theUser = applicationUserRepository.findByUsername(p.getName());
+            m.addAttribute("userID", theUser.getId());
+            m.addAttribute("username", p.getName());
+            ApplicationUser user = applicationUserRepository.findById(id).get();
+            m.addAttribute("user", user);
+        }
+        return "myprofile";
     }
 
 }
