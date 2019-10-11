@@ -7,7 +7,8 @@
 <body>
 <div th:replace="fragments/common :: ${navbar}"></div>
 <h1>Welcome to [[${user.firstName}]] [[${user.lastName}]]'s profile!</h1>
-<div>Follow this user:
+<div th:if="${shouldShowFollow}">Follow this user:
+    <!-- Java hurt brain-->
     <form action="/follow" method="post">
         <input type="submit" name="follow-user">
         <input type="hidden" th:value="${user.id}" name="id">

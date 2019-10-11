@@ -33,6 +33,8 @@ public class ProfileController {
             m.addAttribute("username", p.getName());
             ApplicationUser user = applicationUserRepository.findById(id).get();
             m.addAttribute("user", user);
+            //If you're not following them, show this.
+            m.addAttribute("shouldShowFollow", !user.getUsersThatFollowMe().contains(theUser));
         }
         return "myprofile";
     }

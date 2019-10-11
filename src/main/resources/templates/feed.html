@@ -12,9 +12,9 @@
 <!--</ul>-->
 <ul th:each="user : ${followingUsers}">
     <li th:text="${user.username}"></li>
-<!--        <ul th:each="post : ${user.user}">-->
-<!--            <li th:text="${post}"></li>-->
-<!--        </ul>-->
+        <ul>
+            <li th:each="post : ${user.posts} "th:text="${post}"></li>
+        </ul>
 </ul>
 </body>
 </html>

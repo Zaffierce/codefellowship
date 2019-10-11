@@ -2,6 +2,7 @@ package com.Zaffierce.codefellowship.controllers;
 
 import com.Zaffierce.codefellowship.models.ApplicationUser;
 import com.Zaffierce.codefellowship.models.ApplicationUserRepository;
+import com.sun.org.apache.xpath.internal.operations.Mod;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -47,26 +48,26 @@ public class ApplicationUserController {
 
     @GetMapping("/users")
     public String getUsers(Model m, Principal p) {
-        if (p != null) {
-            ApplicationUser theUser = applicationUserRepository.findByUsername(p.getName());
-            m.addAttribute("userID", theUser.getId());
-            m.addAttribute("username", p.getName()); }
+        addLoggedInUserToThisPageSomethingAddModelYayGoogleHirePlz(m, p);
         List<ApplicationUser> users = applicationUserRepository.findAll();
-
         m.addAttribute("users", users);
         return "users";
     }
 
     @GetMapping("/users/{userID}")
     public String viewSingleUser(Model m, @PathVariable Long id, Principal p){
+        addLoggedInUserToThisPageSomethingAddModelYayGoogleHirePlz(m, p);
+        ApplicationUser user = applicationUserRepository.findById(id).get();
+        m.addAttribute("user", user);
+        return "myprofile";
+    }
+
+    public void addLoggedInUserToThisPageSomethingAddModelYayGoogleHirePlz(Model m, Principal p) {
         if (p != null) {
             ApplicationUser theUser = applicationUserRepository.findByUsername(p.getName());
             m.addAttribute("userID", theUser.getId());
             m.addAttribute("username", p.getName());
-            ApplicationUser user = applicationUserRepository.findById(id).get();
-            m.addAttribute("user", user);
         }
-        return "myprofile";
     }
 
 }
