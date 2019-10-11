@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" href="/style.css" type="text/css">
 </head>
 <body>
 <div th:fragment="navbar">
@@ -12,7 +13,7 @@
         <a href="/feed">Your Feed</a>
         <a href="/users">Search Profiles</a>
         <a href="/logout">Logout</a>
-        <div>Welcome [[${username}]]!</div>
+        <div><img id="nav-image" src="/images/cf-logo.png" />[[${username}]]!</div>
     </nav>
 
     <nav th:unless="${username}">
@@ -21,27 +22,5 @@
         <a href="/signup">Join</a>
     </nav>
 </div>
-
-<!--<div th:fragment="nav-loggedout">-->
-<!--    <nav>-->
-
-<!--    </nav>-->
-<!--</div>-->
-
-<!--<div th:fragment="nav-loggedin-user">-->
-<!--    <nav>-->
-
-<!--    </nav>-->
-<!--</div>-->
-
-<!--<div th:fragment="nav-loggedin-admin">-->
-<!--    <nav>-->
-<!--        <a href="/">Home</a>-->
-<!--        <a href="/logout">Logout</a>-->
-<!--        <a href="/users">User Management</a>-->
-<!--    </nav>-->
-<!--</div>-->
-
-
 </body>
 </html>

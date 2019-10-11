@@ -3,10 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <title>Home</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="/style.css" type="text/css">
 </head>
 <body>
 <div th:replace="fragments/common :: ${navbar}"></div>
-<h1>This is my home page!  :D</h1>
-<h3>Welcome [[${username}]]</h3>
+<h3 th:unless="${username}">Welcome to the up and coming social media platform, Codefellowship!</h3>
+<h3 th:if="${username}">Welcome back, [[${username}]]</h3>
+<p>A fantastic place to connect with fantastic people.</p>
+
 </body>
 </html>
